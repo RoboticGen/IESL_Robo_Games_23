@@ -1,0 +1,1104 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.33559615572270957 -0.01430634333782762 0.941897313301423 3.221863555290912
+  position 5.994287725406487 0.306769656938879 4.088359718209803
+}
+Robot {
+  translation 0.00100294 -1.63256 0.119285
+  rotation -0.0005952952616646208 0.019254408463358963 0.9998144394727843 -3.137765307179586
+  children [
+    TouchSensor {
+      translation 0 -0.34 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.928496 1 0
+          }
+          geometry Capsule {
+            height 0.04
+            radius 0.01
+          }
+        }
+      ]
+      boundingObject Shape {
+        appearance PBRAppearance {
+          baseColor 0.928496 1 0
+        }
+        geometry Capsule {
+          height 0.04
+          radius 0.01
+          subdivision 16
+        }
+      }
+      physics Physics {
+      }
+      type "force-3d"
+    }
+    Compass {
+      rotation 0 0 1 3.14159
+      zAxis FALSE
+    }
+    Camera {
+      translation -0.00999998 -0.325978 0.555
+      rotation -0.3574071270187627 -0.35740612701840735 0.8628563066501258 -1.7177753071795863
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Capsule {
+            height 0.05
+            radius 0.02
+          }
+        }
+      ]
+      name "top camera"
+      fieldOfView 1
+      width 640
+      height 640
+      lens Lens {
+      }
+      focus Focus {
+      }
+    }
+    Camera {
+      translation -7.82286e-08 -0.320339 0.212588
+      rotation 0.1294290535120002 0.1294290535120002 -0.9831054064615734 1.58783
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Capsule {
+            height 0.05
+            radius 0.02
+          }
+        }
+      ]
+      name "front camera"
+      fieldOfView 2
+      width 640
+      height 640
+      lens Lens {
+      }
+      focus Focus {
+      }
+    }
+    Solid {
+      translation 0.12 -0.25 -1.68964e-06
+      rotation 1 0 0 1.5708
+      children [
+        DistanceSensor {
+          translation 1.01962e-08 -0.07 0.01
+          rotation 0 1 0 -1.5707953071795862
+          name "distance sensorFL"
+          lookupTable [
+            0 400 0
+            0.02 400 0
+            4 0 0
+          ]
+        }
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.04
+          }
+        }
+      ]
+      name "eye1"
+    }
+    Solid {
+      translation -0.12 -0.25 -1.68964e-06
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.04
+          }
+        }
+      ]
+      name "eye2"
+    }
+    DEF body Pose {
+      children [
+        DEF Front Group {
+          children [
+            Solid {
+              translation 0 -0.28 0
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position 3.14
+                    axis 0 0 1
+                    anchor 0 -0.02 0.6
+                    maxStop 3.5
+                  }
+                  device [
+                    RotationalMotor {
+                      name "pole motor"
+                      maxPosition 3.14
+                      maxTorque 50
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 -0.02 0.26000000000000123
+                    rotation 0 0 0.9999999999999999 3.14
+                    children [
+                      DEF Front_Pole_shape Shape {
+                        appearance PBRAppearance {
+                          baseColor 0.581048 0.587976 0.587976
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry Cylinder {
+                          height 0.6
+                          radius 0.04
+                        }
+                      }
+                      SliderJoint {
+                        jointParameters JointParameters {
+                          position 0.6
+                          maxStop 0.7
+                        }
+                        device [
+                          LinearMotor {
+                            name "vertical motor"
+                            maxForce 150
+                          }
+                        ]
+                        endPoint Solid {
+                          translation -0.000303705 -0.0048367 -0.0863412164597327
+                          rotation 0.1475279059812825 -0.00043487429562803965 -0.9890577980285706 0.0006445810330784821
+                          children [
+                            DEF Gripper Group {
+                              children [
+                                Solid {
+                                  translation 0 -0.05 0.36
+                                  children [
+                                    DEF L SliderJoint {
+                                      jointParameters JointParameters {
+                                        position 1.00876424585436e-05
+                                        axis 1 0 0
+                                        minStop -0.05
+                                        maxStop 0.2
+                                        springConstant 0.1
+                                        staticFriction 1
+                                      }
+                                      device [
+                                        LinearMotor {
+                                          name "horizontal motorL"
+                                          minPosition -0.05
+                                          maxPosition 0.2
+                                          maxForce 20
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation 0.1000138858447083 -0.10991121379382018 -3.454605242277087e-05
+                                        rotation 0.05852141429357844 -0.7131859335207078 -0.6985277863458803 -1.59432835911133e-05
+                                        children [
+                                          DEF cone2 Solid {
+                                            rotation 0 1 0 1.5708
+                                            children [
+                                              VacuumGripper {
+                                                rotation 0 1 0 -1.5707953071795862
+                                                name "vacuum gripperL"
+                                                boundingObject Shape {
+                                                  appearance PBRAppearance {
+                                                    baseColor 0.494118 0.500008 0.500008
+                                                  }
+                                                  geometry Box {
+                                                    size 0.03 0.14 0.1
+                                                  }
+                                                }
+                                                physics Physics {
+                                                }
+                                                isOn TRUE
+                                                tensileStrength 50
+                                                shearStrength 100
+                                                contactPoints 1
+                                              }
+                                            ]
+                                            physics Physics {
+                                            }
+                                          }
+                                          Solid {
+                                            translation 0.01 0 0
+                                            children [
+                                              Shape {
+                                                appearance PBRAppearance {
+                                                  baseColor 0.494118 0.500008 0.500008
+                                                }
+                                                geometry Box {
+                                                  size 0.03 0.2 0.1
+                                                }
+                                              }
+                                            ]
+                                            name "solid(1)"
+                                            boundingObject Box {
+                                              size 0.03 0.2 0.1
+                                            }
+                                            physics Physics {
+                                            }
+                                          }
+                                        ]
+                                        name "L_Slider"
+                                        boundingObject Box {
+                                          size 0.03 0.2 0.1
+                                        }
+                                        physics Physics {
+                                        }
+                                      }
+                                    }
+                                    DEF R SliderJoint {
+                                      jointParameters JointParameters {
+                                        position 0.031100832679072682
+                                        axis 1 0 0
+                                        minStop -0.15
+                                        maxStop 0.1
+                                        springConstant 0.1
+                                        staticFriction 1
+                                      }
+                                      device [
+                                        LinearMotor {
+                                          name "horizontal motorR"
+                                          minPosition -0.15
+                                          maxPosition 0.1
+                                          maxForce 20
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation -0.11889995613707596 -0.110017621952471 -6.406779253635697e-05
+                                        rotation -0.7192656751982169 0.6378063011837409 0.27542696064831473 -5.76517601569293e-06
+                                        children [
+                                          DEF cone1 Solid {
+                                            rotation 0 1 0 1.01416e-06
+                                            children [
+                                              VacuumGripper {
+                                                name "vacuum gripperR"
+                                                boundingObject Shape {
+                                                  appearance PBRAppearance {
+                                                    baseColor 0.494118 0.500008 0.500008
+                                                  }
+                                                  geometry Box {
+                                                    size 0.03 0.18 0.1
+                                                  }
+                                                }
+                                                physics Physics {
+                                                }
+                                                isOn TRUE
+                                                tensileStrength 50
+                                                shearStrength 100
+                                                contactPoints 1
+                                              }
+                                            ]
+                                            boundingObject Shape {
+                                              appearance PBRAppearance {
+                                                baseColor 0.494118 0.500008 0.500008
+                                              }
+                                              geometry Box {
+                                                size 0.03 0.14 0.1
+                                              }
+                                            }
+                                            physics Physics {
+                                            }
+                                          }
+                                          Solid {
+                                            translation -0.01 0 0
+                                            children [
+                                              DistanceSensor {
+                                                translation 3.67321e-08 -0.04 -0.05
+                                                rotation 0 1 0 1.5708
+                                                name "gripper_distance_sensor"
+                                                lookupTable [
+                                                  0 0 0
+                                                  0.3 30 0
+                                                ]
+                                                numberOfRays 5
+                                                aperture 0.1
+                                              }
+                                              Shape {
+                                                appearance PBRAppearance {
+                                                  baseColor 0.494118 0.500008 0.500008
+                                                }
+                                                geometry Box {
+                                                  size 0.03 0.2 0.1
+                                                }
+                                              }
+                                            ]
+                                            name "solid(1)"
+                                            boundingObject Box {
+                                              size 0.03 0.2 0.1
+                                            }
+                                            physics Physics {
+                                            }
+                                          }
+                                        ]
+                                        name "R_Slider"
+                                        boundingObject Box {
+                                          size 0.03 0.2 0.1
+                                        }
+                                        physics Physics {
+                                        }
+                                      }
+                                    }
+                                    DEF gripper_shape Shape {
+                                      appearance PBRAppearance {
+                                        baseColor 0 0 0
+                                        roughness 1
+                                        metalness 0
+                                      }
+                                      geometry Box {
+                                        size 0.4 0.02 0.05
+                                      }
+                                    }
+                                  ]
+                                  name "gripper"
+                                  boundingObject Box {
+                                    size 0.4 0.02 0.05
+                                  }
+                                  physics Physics {
+                                  }
+                                }
+                                Solid {
+                                  translation 0 -0.01 0.36
+                                  children [
+                                    Shape {
+                                      appearance PBRAppearance {
+                                      }
+                                      geometry Box {
+                                        size 0.08 0.08 0.05
+                                      }
+                                    }
+                                  ]
+                                  name "gripper_bracket"
+                                  boundingObject Box {
+                                    size 0.08 0.08 0.05
+                                  }
+                                  physics Physics {
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                          name "slider"
+                          physics Physics {
+                          }
+                        }
+                      }
+                    ]
+                    name "Front_Pole"
+                    boundingObject DEF Front_Pole_shape Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.581048 0.587976 0.587976
+                        roughness 1
+                        metalness 0
+                      }
+                      geometry Cylinder {
+                        height 0.6
+                        radius 0.04
+                      }
+                    }
+                    physics Physics {
+                    }
+                  }
+                }
+                DEF Front_Bracket_Shape Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.581048 0.587976 0.587976
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.05 0.1 0.08
+                  }
+                }
+              ]
+              name "front_bracket"
+              boundingObject Box {
+                size 0.05 0.1 0.08
+              }
+              physics Physics {
+                damping Damping {
+                }
+              }
+            }
+          ]
+        }
+        DEF body_shape Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.430289 0.445823
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.4 0.5 0.15
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 12.11325116061423
+        anchor 0.26 0.15 0
+      }
+      device [
+        DEF motor_LB RotationalMotor {
+          name "motor_LB"
+          maxTorque 100
+        }
+      ]
+      endPoint Solid {
+        translation 0.25999992059916616 0.15000274105815106 9.565586774809417e-05
+        rotation -0.7086219637709467 -0.02261369407751422 0.7052258739592415 3.0872499965242057
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.1
+              radius 0.1
+            }
+          }
+        ]
+        name "solid_wheel_LB"
+        boundingObject DEF wheelbound Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.11
+          }
+        }
+        physics DEF wheel_physics Physics {
+          density 4000
+          damping Damping {
+          }
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 12.12521224209064
+        anchor -0.26 0.15 0
+      }
+      device [
+        DEF motor_RB RotationalMotor {
+          name "motor_RB"
+          maxTorque 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.2600019255302824 0.14999706635594887 0.00018596237117636207
+        rotation -0.7058761752830696 -0.03186761036089035 0.7076180329652657 3.0886753167955225
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.1
+              radius 0.1
+            }
+          }
+        ]
+        name "solid_wheel_RB"
+        boundingObject DEF wheelbound Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.11
+          }
+        }
+        physics DEF wheel_physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 12.069756423914772
+        anchor 0.26 -0.15 0
+      }
+      device [
+        DEF motor_LF RotationalMotor {
+          name "motor_LF"
+          acceleration 1
+          maxTorque 100
+        }
+      ]
+      endPoint Solid {
+        translation 0.2599978074473287 -0.1500053712373681 0.00019643665879455436
+        rotation -0.7071127227074602 -0.0068522288463986215 0.7070676377441405 3.1171499987130384
+        children [
+          DEF wheel2 Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.1
+              radius 0.1
+            }
+          }
+        ]
+        name "solid_wheel_LF"
+        boundingObject DEF wheelbound Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.11
+          }
+        }
+        physics USE wheel_physics
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 12.125891026116616
+        anchor -0.26 -0.15 0
+      }
+      device [
+        DEF motor_RF RotationalMotor {
+          name "motor_RF"
+          maxTorque 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.2600007817188083 -0.15000003359079944 0.00011150914861802572
+        rotation -0.7070820481237718 -0.02959652832631563 0.7065118701990234 3.083260148896106
+        children [
+          USE wheel2
+        ]
+        name "solid_wheel_RF"
+        boundingObject DEF wheelbound Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.11
+          }
+        }
+        physics USE wheel_physics
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.4 0.5 0.15
+  }
+  physics Physics {
+    centerOfMass [
+      0 0.1 0
+    ]
+  }
+  controller "obo_controller_v1"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 6 4
+  floorAppearance PBRAppearance {
+    baseColor 0.313726 0.619608 0.184314
+    metalness 0
+  }
+}
+DEF BALL_AREA Pose {
+  translation -1.8 -8.44714e-06 0.001
+  rotation 0 0 1 0.785403
+  children [
+    Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Plane {
+        size 0.85 0.85
+      }
+    }
+  ]
+}
+DEF START_AREA_E Pose {
+  translation 0 -1.55 0.0015
+  rotation 0 0 -1 -5.307179586466759e-06
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.333333 1
+        metalness 0
+      }
+      geometry Plane {
+        size 0.9 0.9
+      }
+    }
+  ]
+}
+DEF START_AREA_B Pose {
+  translation 0 -1.55 0.002
+  rotation 0 0 -1 -5.307179586466759e-06
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 1
+        metalness 0
+      }
+      geometry Plane {
+        size 0.7 0.7
+      }
+    }
+  ]
+}
+DEF TOWER_AREA Pose {
+  translation 1.25 -3.39657e-06 0.001
+  rotation 0 0 -1 -5.307179586466759e-06
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.996078 0.819608 0.254902
+        metalness 0
+      }
+      geometry Plane {
+        size 3.5 4
+      }
+    }
+  ]
+}
+DEF TOWERS Group {
+  children [
+    Solid {
+      translation 2.69 0 0
+      children [
+        DEF TOWER Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "Tower.obj"
+            ]
+          }
+        }
+      ]
+      boundingObject USE TOWER
+      locked TRUE
+    }
+    Solid {
+      translation 2.69 -0.75 0
+      children [
+        DEF TOWER Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "Tower.obj"
+            ]
+          }
+        }
+      ]
+      name "solid(3)"
+      boundingObject USE TOWER
+    }
+    Solid {
+      translation 2.69 -1.5 0
+      children [
+        DEF TOWER Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "Tower.obj"
+            ]
+          }
+        }
+      ]
+      name "solid(4)"
+      boundingObject USE TOWER
+      locked TRUE
+    }
+    Solid {
+      translation 2.69 0.75 0
+      children [
+        DEF TOWER Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "Tower.obj"
+            ]
+          }
+        }
+      ]
+      name "solid(1)"
+      boundingObject USE TOWER
+      locked TRUE
+    }
+    Solid {
+      translation 2.69 1.5 0
+      children [
+        DEF TOWER Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "Tower.obj"
+            ]
+          }
+        }
+      ]
+      name "solid(2)"
+      boundingObject USE TOWER
+      locked TRUE
+    }
+  ]
+}
+DEF BALLS Group {
+  children [
+    Solid {
+      translation -2.25586 -5.89673e-08 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(5)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -2.11446 -0.141421 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF RED_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.956863 0.211765 0.298039
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(9)"
+      boundingObject USE RED_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.97306 -0.282841 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(16)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.83166 -0.424261 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(20)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -2.11446 0.141421 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF RED_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.956863 0.211765 0.298039
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(6)"
+      boundingObject USE RED_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.97306 -4.10327e-08 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(10)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.83166 -0.141421 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF RED_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.956863 0.211765 0.298039
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(15)"
+      boundingObject USE RED_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.69026 -0.282841 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(19)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.97306 0.282841 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(7)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.83166 0.141421 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF RED_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.956863 0.211765 0.298039
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(11)"
+      boundingObject USE RED_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.69026 -4.61033e-07 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(14)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.53472 0.155561 0.0893638
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF RED_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.956863 0.211765 0.298039
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(18)"
+      boundingObject USE RED_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.83166 0.424261 0.08936378481833442
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(8)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.38624 0.0212129 0.0893638
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(12)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.53467 -0.127265 0.0893638
+      rotation 0 0 0.9999999999999999 0.7853979999999999
+      children [
+        DEF RED_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.956863 0.211765 0.298039
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(13)"
+      boundingObject USE RED_BALL
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -1.67513 0.30632 0.0857138
+      rotation 0.5009871452346915 0.6554311900075632 0.5651741638423183 -1.896365307179586
+      children [
+        DEF BLUE_BALL Shape {
+          appearance PBRAppearance {
+            baseColor 0.188235 0.498039 0.886275
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.095
+          }
+        }
+      ]
+      name "solid(17)"
+      boundingObject USE BLUE_BALL
+      physics Physics {
+      }
+    }
+  ]
+}
