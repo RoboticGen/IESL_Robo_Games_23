@@ -1,0 +1,5 @@
+publish: true
+type: demo
+dockerCompose:theia:webots-project/controllers/obo_controller_v1/obo_controller_v1.py"
+
+
